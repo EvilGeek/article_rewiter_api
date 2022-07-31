@@ -52,6 +52,13 @@ def api():
         return jsonify(status="Unsuccessful", text=None, author="Vaibhav Chandra")
 
 
+@app.errorhandler(404)
+
+def not_found(e):
+
+    return render_template("404.html")
+    
+    
 if __name__ == "__main__":
 
     # debug = true will enable the debugger
