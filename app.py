@@ -10,7 +10,7 @@ templates = os.path.join(os.getcwd(),"templates/")
 
 app = Flask(__name__, template_folder=templates)
 
-app.config['SECRET_KEY'] = "secrestsArePrivate
+app.config['SECRET_KEY'] = "secrestsArePrivate"
 
 
 
