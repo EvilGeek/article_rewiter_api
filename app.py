@@ -2,7 +2,9 @@ from Rewriter import Rewriter
 
 import json
 
-import os
+import os 
+import random 
+import string
 
 from flask import Flask,render_template,url_for,request,flash,jsonify
 
@@ -39,7 +41,9 @@ def api():
 
     text = request.args.get("text", default = "*", type = str)
 
-    if text != "*":
+    apikey = request.args.get("apikey", default = "NOAPI", type = str)
+
+    if text != "*" and apikey != "NOAPI":
 
         rewriter = Rewriter(text)
 
@@ -50,6 +54,42 @@ def api():
     else:
 
         return jsonify(status="Unsuccessful", text=None, author="Vaibhav Chandra")
+
+
+
+
+@app.route("/api_key", methods=["GET", "POST"])
+
+def api_key():
+
+    name = request.form.get("name")
+
+    email = request.form.get("email")
+
+    apikey = ''.join(random.choices(string.ascii_uppercase + string.digits + string.ascii_lowercase, k=10))
+
+    if request.method in ["POST", "GET"]:
+
+        if "name" in request.form and "email" in request.form:
+
+            doc = {"name": name, "email": email, "apikey" : apikey}
+
+            if collection.find_one({"email": email}) == None:
+
+                flash("API Key Generated Successfully!")
+
+                return render_template("api.html",apikey=apikey)
+
+            else:
+
+                flask("Email Already Registered")
+
+                return render_template("api.html")
+
+                
+
+    return render_template("api.html")
+
 
 
 @app.errorhandler(404)
