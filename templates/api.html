@@ -287,6 +287,7 @@ of Simple CSS Waves-->
 </div>
 
 </div>
+<div class="container">
 
     {% with messages = get_flashed_messages() %}
 
@@ -301,6 +302,7 @@ of Simple CSS Waves-->
     {% endif %}
 
     {% endwith %}
+    </div>
 
 <!--Header ends-->
 
@@ -360,9 +362,10 @@ of Simple CSS Waves-->
 
             <textarea name="textarea2" class="textarea" readonly="readonly">{{ apikey }}</textarea> 
 
-        <input title="One click transfers the code to the clipboard" type="button" value="Copy to clipboard" onClick="this.form.textarea2.focus();this.form.textarea2.select(); document.execCommand('copy')"/>
+        <input title="One click transfers the code to the clipboard" type="button" value="Copy to clipboard" onClick="this.textarea2.focus();this.textarea2.select(); document.execCommand('copy')"/>
 
-        {%endif%}
+        {%endif%} </div>
+	
 
 <!--Content starts-->
 
