@@ -1,5 +1,5 @@
 from Rewriter import Rewriter
-
+from pymongo import MongoClient
 import json
 
 import os 
@@ -13,6 +13,12 @@ templates = os.path.join(os.getcwd(),"templates/")
 app = Flask(__name__, template_folder=templates)
 
 app.config['SECRET_KEY'] = "secrestsArePrivate"
+
+client = MongoClient(os.environ.get("MONGO_URL"))
+
+db = client["rewiter"]
+
+collection = db["api"]
 
 
 
