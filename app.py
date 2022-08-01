@@ -29,6 +29,7 @@ def index():
     text = request.form.get("text")
 
     print(text)
+    
 
     if text != None:
 
@@ -49,17 +50,28 @@ def api():
 
     apikey = request.args.get("apikey", default = "NOAPI", type = str)
 
-    if text != "*" and apikey != "NOAPI":
+        if collection.find_one({"apikey", apikey}):
 
-        rewriter = Rewriter(text)
+            if text != "*" and apikey != "NOAPI":
 
-        rewritten = rewriter.main()[0]
+                rewriter = Rewriter(text)
 
-        return jsonify(status="Successful", text=rewritten, author="Vaibhav Chandra")
+                rewritten = rewriter.main()[0]
 
-    else:
+                return jsonify(status="Successful", text=rewritten, author="Vaibhav Chandra")
 
-        return jsonify(status="Unsuccessful", text=None, author="Vaibhav Chandra")
+            else:
+
+                return jsonify(status="Unsuccessful", text=None, author="Vaibhav Chandra")
+
+        else:
+
+            return jsonify(status="Unsuccessful", text="Provide an Valid API Key!", author="Vaibhav Chandra")
+ 
+
+
+
+
 
 
 
