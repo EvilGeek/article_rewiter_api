@@ -56,23 +56,31 @@ class Rewriter:
 
         
 
-    def main(self):
+    def main(self, engine):
+        self.engine = engine
+        if self.engine == None:
+            self.engine = 1
+        if self.engine == 1:
 
-        self.retext = self.req(self.text)
+            self.retext = self.req(self.text)
 
-        self.changed = self.filter(self.retext)
+            self.changed = self.filter(self.retext)
 
-        self.rewrittentxt = self.retext.replace(self.sub1, "")
+            self.rewrittentxt = self.retext.replace(self.sub1, "")
 
-        self.rewrittentxt = self.rewrittentxt.replace(self.changed, "")
+            self.rewrittentxt = self.rewrittentxt.replace(self.changed, "")
 
-        self.rewrittentxt = html2text.html2text(self.rewrittentxt)
+            self.rewrittentxt = html2text.html2text(self.rewrittentxt)
 
-        self.rewrittentxt = self.rewrittentxt.replace("**", "")
+            self.rewrittentxt = self.rewrittentxt.replace("**", "")
 
-        list = [self.rewrittentxt, self.changed]
-
-        return list
+            self.list = [self.rewrittentxt, self.changed]
+        elif self.engine == 2:
+            self.unftext = requests.post("https://rewritertools.com/article-spinner-tool/php/process.php", data={'data': self.text})
+            self.ntext = unftext.text
+            self.changed = None
+            self.list = [self.ntext, self.changed]
+        return self.list
 
     
 
