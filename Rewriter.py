@@ -77,7 +77,7 @@ class Rewriter:
             self.list = [self.rewrittentxt, self.changed]
         elif self.engine == 2:
             self.unftext = requests.post("https://rewritertools.com/article-spinner-tool/php/process.php", data={'data': self.text})
-            self.ntext = unftext.text
+            self.ntext = self.unftext.text
             self.changed = None
             self.list = [self.ntext, self.changed]
         return self.list
