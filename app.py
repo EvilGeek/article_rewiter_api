@@ -35,7 +35,7 @@ def index():
 
         rewriter = Rewriter(text)
 
-        rewritten = rewriter.main()[0]
+        rewritten = rewriter.main(2)[0]
 
         return render_template("index.html",retext=rewritten,originaltxt=text)
 
