@@ -50,23 +50,23 @@ def api():
 
     apikey = request.args.get("apikey", default = "NOAPI", type = str)
 
-    if collection.find_one({"apikey": apikey}):
+   
 
-        if text != "*" and apikey != "NOAPI":
+    if text != "*" and apikey != "NOAPI":
 
-            rewriter = Rewriter(text)
+        rewriter = Rewriter(text)
 
-            rewritten = rewriter.main()[0]
+        rewritten = rewriter.main()[0]
 
-            return jsonify(status="Successful", text=rewritten, author="Vaibhav Chandra")
-
-        else:
-
-            return jsonify(status="Unsuccessful", text=None, author="Vaibhav Chandra")
+        return jsonify(status="Successful", text=rewritten, author="Vaibhav Chandra")
 
     else:
 
-        return jsonify(status="Unsuccessful", text="Provide an Valid API Key!", author="Vaibhav Chandra")
+        return jsonify(status="Unsuccessful", text=None, author="Vaibhav Chandra")
+
+   
+
+    
  
 
 
