@@ -50,7 +50,7 @@ def api():
 
     apikey = request.args.get("apikey", default = "NOAPI", type = str)
 
-        if collection.find_one({"apikey", apikey}):
+        if collection.find_one({"apikey": apikey}):
 
             if text != "*" and apikey != "NOAPI":
 
